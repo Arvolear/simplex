@@ -130,33 +130,33 @@ jobs:
             simplex-macos-aarch64.attestation.txt
             simplex-macos-aarch64.tar.gz
 
-  publish:
-    name: Publish to crates.io
-    runs-on: ubuntu-latest
-    needs: [ build, release ]
-    permissions:
-      id-token: write
-      contents: read
-    concurrency:
-      group: publish-core-${{ github.ref }}
-      cancel-in-progress: false
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+  # publish:
+  #   name: Publish to crates.io
+  #   runs-on: ubuntu-latest
+  #   needs: [ build, release ]
+  #   permissions:
+  #     id-token: write
+  #     contents: read
+  #   concurrency:
+  #     group: publish-core-${{ github.ref }}
+  #     cancel-in-progress: false
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v6
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
+  #     - name: Install Rust toolchain
+  #       uses: dtolnay/rust-toolchain@stable
+  #       with:
+  #         toolchain: stable
 
-      - name: Check package
-        run: cargo package --workspace --exclude simplex-cli
+  #     - name: Check package
+  #       run: cargo package --workspace --exclude simplex-cli
 
-      - name: Authenticate
-        uses: rust-lang/crates-io-auth-action@v1
-        id: auth
+  #     - name: Authenticate
+  #       uses: rust-lang/crates-io-auth-action@v1
+  #       id: auth
 
-      - name: Publish
-        run: cargo publish --workspace --exclude simplex-cli
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
+  #     - name: Publish
+  #       run: cargo publish --workspace --exclude simplex-cli
+  #       env:
+  #         CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
