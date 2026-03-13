@@ -38,19 +38,19 @@ jobs:
             electrs_target: "macos"
     steps:
       - name: Checkout
-      - uses: actions/checkout@v6
+        uses: actions/checkout@v6
         with:
           persist-credentials: false
           ref: ${{ github.event.inputs.tag || github.ref }}
 
       - name: Install Rust toolchain
-      - uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           targets: ${{ matrix.target }}
 
       - name: Use Rust cache
-      - uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@v2
 
       - name: Build binaries
         env:
@@ -66,7 +66,7 @@ jobs:
           ELEMENTSD_VERSION: "23.3.1"
           ELEMENTSD_TARGET: ${{ matrix.elementsd_target }}
           ELECTRS_TARGET: ${{ matrix.electrs_target }}
-      - run: |
+        run: |
           ELEMENTSD_FILENAME="elements-${ELEMENTSD_VERSION}-${ELEMENTSD_TARGET}.tar.gz"
           ELECTRS_FILENAME="electrs_${ELECTRS_TARGET}_esplora_027e38d3ebc2f85b28ae76f8f3448438ee4fc7b1_liquid.zip"
 
@@ -145,7 +145,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install Rust toolchain
-      - uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
 
