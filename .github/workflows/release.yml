@@ -57,9 +57,9 @@ jobs:
           RUST_PROFILE: release
           TARGET: ${{ matrix.target }}
           OUT_DIR: target/${{ matrix.target }}/${{ env.RUST_PROFILE }}
-          run: | 
-            cargo build --target $TARGET --profile $RUST_PROFILE --bins
-            mv $OUT_DIR/simplex simplex
+        run: | 
+          cargo build --target $TARGET --profile $RUST_PROFILE --bins
+          mv $OUT_DIR/simplex simplex
  
       - name: Install elementsd and electrs
         env:
